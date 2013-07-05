@@ -3,13 +3,13 @@
 A simple log for Debug Trace Warn Error Critacal, extract code from astaxie/beego.
 
 
-## ÈÕÖ¾´¦Àí
+## æ—¥å¿—å¤„ç†
 
-beelogÄ¬ÈÏÓÐÒ»¸ö³õÊ¼»¯µÄBeeLogger¶ÔÏóÊä³öÄÚÈÝµ½stdoutÖÐ£¬Äã¿ÉÒÔÍ¨¹ýÈçÏÂµÄ·½Ê½ÉèÖÃ×Ô¼ºµÄÊä³ö£º
+beelogé»˜è®¤æœ‰ä¸€ä¸ªåˆå§‹åŒ–çš„BeeLoggerå¯¹è±¡è¾“å‡ºå†…å®¹åˆ°stdoutä¸­ï¼Œä½ å¯ä»¥é€šè¿‡å¦‚ä¸‹çš„æ–¹å¼è®¾ç½®è‡ªå·±çš„è¾“å‡ºï¼š
 
 	beelog.SetLogger(*log.Logger)
 
-Ö»ÒªÄãµÄÊä³ö·ûºÏ`*log.Logger`¾Í¿ÉÒÔ£¬ÀýÈçÊä³öµ½ÎÄ¼þ£º
+åªè¦ä½ çš„è¾“å‡ºç¬¦åˆ`*log.Logger`å°±å¯ä»¥ï¼Œä¾‹å¦‚è¾“å‡ºåˆ°æ–‡ä»¶ï¼š
 
 	fd,err := os.OpenFile("/var/log/beeapp/beeapp.log", os.O_RDWR|os.O_APPEND, 0644)
 	if err != nil {
@@ -20,7 +20,7 @@ beelogÄ¬ÈÏÓÐÒ»¸ö³õÊ¼»¯µÄBeeLogger¶ÔÏóÊä³öÄÚÈÝµ½stdoutÖÐ£¬Äã¿ÉÒÔÍ¨¹ýÈçÏÂµÄ·½Ê½ÉèÖ
 	beelog.SetLogger(lg)
 
 
-### ²»Í¬¼¶±ðµÄlogÈÕÖ¾º¯Êý
+### ä¸åŒçº§åˆ«çš„logæ—¥å¿—å‡½æ•°
 
 * Trace(v ...interface{})
 * Debug(v ...interface{})
@@ -29,19 +29,19 @@ beelogÄ¬ÈÏÓÐÒ»¸ö³õÊ¼»¯µÄBeeLogger¶ÔÏóÊä³öÄÚÈÝµ½stdoutÖÐ£¬Äã¿ÉÒÔÍ¨¹ýÈçÏÂµÄ·½Ê½ÉèÖ
 * Error(v ...interface{})
 * Critical(v ...interface{})
 
-Äã¿ÉÒÔÍ¨¹ýÏÂÃæµÄ·½Ê½ÉèÖÃ²»Í¬µÄÈÕÖ¾·Ö¼¶£º
+ä½ å¯ä»¥é€šè¿‡ä¸‹é¢çš„æ–¹å¼è®¾ç½®ä¸åŒçš„æ—¥å¿—åˆ†çº§ï¼š
 
 	beelog.SetLevel(beelog.LevelError)
 
-µ±Äã´úÂëÖÐÓÐºÜ¶àÈÕÖ¾Êä³öÖ®ºó£¬Èç¹ûÏëÉÏÏß£¬µ«ÊÇÄã²»ÏëÊä³öTrace¡¢Debug¡¢InfoµÈÐÅÏ¢£¬ÄÇÃ´Äã¿ÉÒÔÉèÖÃÈçÏÂ£º
+å½“ä½ ä»£ç ä¸­æœ‰å¾ˆå¤šæ—¥å¿—è¾“å‡ºä¹‹åŽï¼Œå¦‚æžœæƒ³ä¸Šçº¿ï¼Œä½†æ˜¯ä½ ä¸æƒ³è¾“å‡ºTraceã€Debugã€Infoç­‰ä¿¡æ¯ï¼Œé‚£ä¹ˆä½ å¯ä»¥è®¾ç½®å¦‚ä¸‹ï¼š
 
 	beelog.SetLevel(beelog.LevelWarning)
 
-ÕâÑùµÄ»°¾Í²»»áÊä³öÐ¡ÓÚÕâ¸ölevelµÄÈÕÖ¾£¬ÈÕÖ¾µÄÅÅÐòÈçÏÂ£º
+è¿™æ ·çš„è¯å°±ä¸ä¼šè¾“å‡ºå°äºŽè¿™ä¸ªlevelçš„æ—¥å¿—ï¼Œæ—¥å¿—çš„æŽ’åºå¦‚ä¸‹ï¼š
 
-LevelTrace¡¢LevelDebug¡¢LevelInfo¡¢LevelWarning¡¢LevelError¡¢LevelCritical
+LevelTraceã€LevelDebugã€LevelInfoã€LevelWarningã€LevelErrorã€LevelCritical
 
-ÓÃ»§¿ÉÒÔ¸ù¾Ý²»Í¬µÄ¼¶±ðÊä³ö²»Í¬µÄ´íÎóÐÅÏ¢£¬ÈçÏÂÀý×ÓËùÊ¾£º
+ç”¨æˆ·å¯ä»¥æ ¹æ®ä¸åŒçš„çº§åˆ«è¾“å‡ºä¸åŒçš„é”™è¯¯ä¿¡æ¯ï¼Œå¦‚ä¸‹ä¾‹å­æ‰€ç¤ºï¼š
 
 
 ### Examples of log messages
