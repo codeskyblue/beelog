@@ -1,8 +1,13 @@
 // beelog project beelog.go
 package beelog
 
-import "log"
-import "os"
+import (
+	"fmt"
+	"log"
+	"os"
+	"runtime"
+	"strings"
+)
 
 var (
 	level     = LevelTrace
@@ -16,6 +21,7 @@ const (
 	LevelWarning
 	LevelError
 	LevelCritical
+	LevelFatal
 )
 
 func SetLevel(l int) {
@@ -26,38 +32,65 @@ func SetLogger(l *log.Logger) {
 	BeeLogger = l
 }
 
-func Trace(v ...interface{}) {
-	if level <= LevelTrace {
-		BeeLogger.Printf("[T] %v\n", v)
+func logPrint(le int, format string, a ...interface{}) {
+	if le < level {
+		return
 	}
+	var s string
+	switch le {
+	case LevelDebug:
+		s = "[D]"
+	case LevelTrace:
+		s = "[T]"
+	case LevelWarning:
+		s = "[W]"
+	case LevelInfo:
+		s = "[I]"
+	case LevelError:
+		s = "[E]"
+	case LevelFatal:
+		s = "[F]"
+	case LevelCritical:
+		s = "[C]"
+	}
+	// Retrieve the stack infos
+	_, file, line, ok := runtime.Caller(2)
+	if !ok {
+		file = "<unknown>"
+		line = -1
+	} else {
+		file = file[strings.LastIndex(file, "/")+1:]
+	}
+	BeeLogger.Printf(fmt.Sprintf("%s %s:%d - %s\n", s, file, line, format), a...)
+	if le == LevelFatal {
+		os.Exit(1)
+	}
+}
+
+func Trace(v ...interface{}) {
+	logPrint(LevelTrace, "%v", v)
+}
+
+func Debugf(format string, v ...interface{}) {
+	logPrint(LevelDebug, format, v...)
 }
 
 func Debug(v ...interface{}) {
-	if level <= LevelDebug {
-		BeeLogger.Printf("[D] %v\n", v)
-	}
+	logPrint(LevelDebug, "%v", v)
 }
 
 func Info(v ...interface{}) {
-	if level <= LevelInfo {
-		BeeLogger.Printf("[I] %v\n", v)
-	}
+	logPrint(LevelInfo, "%v", v)
 }
 
 func Warn(v ...interface{}) {
-	if level <= LevelWarning {
-		BeeLogger.Printf("[W] %v\n", v)
-	}
+	logPrint(LevelWarning, "%v", v)
 }
 
 func Error(v ...interface{}) {
-	if level <= LevelError {
-		BeeLogger.Printf("[E] %v\n", v)
-	}
+	logPrint(LevelError, "%v", v)
 }
 
 func Critical(v ...interface{}) {
-	if level <= LevelCritical {
-		BeeLogger.Printf("[C] %v\n", v)
-	}
+	logPrint(LevelCritical, "%v", v)
 }
