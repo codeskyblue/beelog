@@ -1,3 +1,5 @@
+*This project is not maintained anymore. Suggest to use* **[klog](https://github.com/shxsun/klog)**
+
 # beelog
 
 A simple log for Debug Trace Warn Error Critacal, extract code from astaxie/beego.
